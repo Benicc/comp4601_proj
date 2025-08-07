@@ -81,6 +81,8 @@ void output_manager(hls::stream<hash_t> &input, hls::stream<hash_t> &feedback, h
 }
 
 void merkle_tree(hls::stream<ap_uint<512>> &in, hls::stream<ap_uint<256>> &out) {
+    #pragma HLS INTERFACE axis port=in
+    #pragma HLS INTERFACE axis port=out
     #pragma HLS INTERFACE mode=ap_ctrl_none port=return
     hls_thread_local hls::stream<hash_t, 64> feedback; // output_manager => input_manager
     hls_thread_local hls::stream<hash_t, 64> in_sha3; // input_manager => sha_3
